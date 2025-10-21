@@ -1,0 +1,24 @@
+Source,Target,Relationship
+Philosophy,Metaphysics,includes
+Philosophy,Epistemology,includes
+Philosophy,Ethics,includes
+Philosophy,Logic,includes
+Philosophy,Aesthetics,includes
+Philosophy,Philosophy of Mind,includes
+Philosophy,Philosophy of Science,includes
+Philosophy,Philosophy of Cognitive Science,includes
+Metaphysics,Ontology,includes
+Metaphysics,Cosmology,includes
+Philosophy of Mind,Philosophy of Language,includes
+Philosophy of Mind,Phenomenology,includes
+Philosophy of Mind,Political Philosophy,includes
+Political Philosophy,Existentialism,includes
+Political Philosophy,Pragmatism,includes
+Political Philosophy,Analytic Philosophy,includes
+Analytic Philosophy,Continental Philosophy,includes
+Continental Philosophy,Post-Structuralism,includes
+Philosophy of Science,Philosophy of Physics,includes
+Philosophy of Science,Philosophy of Biology,includes
+Philosophy of Science,Philosophy of Mind,includes
+Philosophy of Mind,Neuroscience,includes
+Philosophy of Cognitive Science,Philosophy of Language,includes
