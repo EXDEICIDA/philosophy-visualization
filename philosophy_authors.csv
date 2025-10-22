@@ -1,8 +1,12 @@
 Branch,Subfield,Author,Work
 Metaphysics,Ontology,Immanuel Kant,Critique of Pure Reason
+Metaphysics,Ontology,J.G. Fichte,Foundations of the Science of Knowledge
+Metaphysics,Ontology,F.W.J. Schelling,System of Transcendental Idealism
 Metaphysics,Ontology,John Locke,An Essay Concerning Human Understanding
 Metaphysics,Ontology,David Hume,A Treatise of Human Nature
 Metaphysics,Ontology,Heraclitus,Fragments
+Metaphysics,Ontology,Immanuel Kant,Prolegomena to Any Future Metaphysics
+Metaphysics,Post-Structuralism,Gilles Deleuze,Difference and Repetition
 Metaphysics,Ontology,Baruch Spinoza,Ethics
 Metaphysics,Ontology,Parmenides,On Nature
 Metaphysics,Ontology,René Descartes,Meditations on First Philosophy
@@ -15,6 +19,7 @@ Metaphysics,Cosmology,Philipp Mainländer,Philosophy of Redemption
 Metaphysics,Cosmology,Arthur Schopenhauer,The World as Will and Representation
 Metaphysics,Cosmology,Plato,Timaeus
 Metaphysics,Cosmology,Lucretius,On the Nature of Things
+Epistemology,Post-Structuralism,Jacques Derrida,Of Grammatology
 Epistemology,,Immanuel Kant,Critique of Pure Reason
 Epistemology,,John Locke,An Essay Concerning Human Understanding
 Epistemology,,David Hume,An Enquiry Concerning Human Understanding
@@ -26,13 +31,19 @@ Epistemology,,Edmund Gettier,Is Justified True Belief Knowledge?
 Epistemology,,Karl Popper,The Logic of Scientific Discovery
 Epistemology,,Plato,Theaetetus
 Epistemology,,Aristotle,Posterior Analytics
+Epistemology,,Søren Kierkegaard,Concluding Unscientific Postscript
 Ethics,,Immanuel Kant,Groundwork of the Metaphysics of Morals
 Ethics,,David Hume,A Treatise of Human Nature
 Ethics,,Friedrich Nietzsche,On the Genealogy of Morality
 Ethics,,Baruch Spinoza,Ethics
+Ethics,,Søren Kierkegaard,Either/Or
+Ethics,Post-Structuralism,Gilles Deleuze,Anti-Oedipus
+Ethics,,Georg Wilhelm Friedrich Hegel,Elements of the Philosophy of Right
+Ethics,Existentialism,Jean-Paul Sartre,Existentialism is a Humanism
 Ethics,,Philipp Mainländer,Philosophy of Redemption
 Ethics,,John Stuart Mill,Utilitarianism
 Ethics,,Aristotle,Nicomachean Ethics
+Ethics,,Søren Kierkegaard,Fear and Trembling
 Ethics,,Alasdair MacIntyre,After Virtue
 Ethics,,Plato,Republic
 Ethics,,Michel Foucault,Discipline and Punish: The Birth of the Prison
@@ -44,6 +55,7 @@ Logic,,John Locke,An Essay Concerning Human Understanding
 Logic,,David Hume,An Enquiry Concerning Human Understanding
 Logic,,Bertrand Russell,Principia Mathematica
 Logic,,Georg Wilhelm Friedrich Hegel,Science of Logic
+Logic,,Ludwig Wittgenstein,Tractatus Logico-Philosophicus
 Logic,,Gottlob Frege,Begriffsschrift
 Logic,,Kurt Gödel,On Formally Undecidable Propositions
 Logic,,Alfred North Whitehead,Process and Reality
@@ -56,6 +68,7 @@ Aesthetics,,Friedrich Schiller,Letters on the Aesthetic Education of Man
 Aesthetics,,Arthur Schopenhauer,The World as Will and Representation
 Aesthetics,,Theodor Adorno,Aesthetic Theory
 Aesthetics,,Plotinus,Enneads
+Aesthetics,,Søren Kierkegaard,Either/Or
 Aesthetics,,Clive Bell,Art
 Philosophy of Mind,Philosophy of Language,Immanuel Kant,Critique of Pure Reason
 Philosophy of Mind,Philosophy of Language,John Locke,An Essay Concerning Human Understanding
@@ -66,7 +79,13 @@ Philosophy of Mind,Philosophy of Language,John Searle,Speech Acts
 Philosophy of Mind,Philosophy of Language,Noam Chomsky,Syntactic Structures
 Philosophy of Mind,Phenomenology,Georg Wilhelm Friedrich Hegel,Phenomenology of Spirit
 Philosophy of Mind,Phenomenology,Edmund Husserl,Ideas
+Philosophy of Mind,Post-Structuralism,Jacques Derrida,Writing and Difference
+Philosophy of Mind,Phenomenology,Søren Kierkegaard,The Concept of Anxiety
+Philosophy of Mind,Phenomenology,Søren Kierkegaard,Sickness Unto Death
+Philosophy of Mind,Phenomenology,Edmund Husserl,Cartesian Meditations
+Philosophy of Mind,Phenomenology,Edmund Husserl,On the Phenomenology of the Consciousness of Internal Time
 Philosophy of Mind,Phenomenology,Michel Foucault,Madness and Civilization
+Philosophy of Mind,Philosophy of Language,Ludwig Wittgenstein,Tractatus Logico-Philosophicus
 Philosophy of Mind,Phenomenology,Maurice Merleau-Ponty,Phenomenology of Perception
 Philosophy of Mind,Phenomenology,Martin Heidegger,Being and Time
 Philosophy of Mind,Phenomenology,Jean-Paul Sartre,Being and Nothingness

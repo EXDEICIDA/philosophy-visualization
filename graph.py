@@ -1,7 +1,6 @@
-# Import the functions from your new utility file
 from graph_utils import load_and_build_graph, create_styled_network, save_network_html
 import webbrowser
-import os  # Used for getting the full file path
+import os
 
 
 def main():

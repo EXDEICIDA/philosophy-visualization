@@ -1,0 +1,267 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100vh;
+                 background-color: #0a0a0a;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 100vh;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    
+<style type="text/css">
+
+  /* --- Fullscreen CSS --- */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevents scrollbars */
+  }
+
+  /* --- PyVis/Bootstrap Override --- */
+  .card, .card-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- NEW: Remove Margin from PyVis's Empty h1 Tags --- */
+  /* This is the fix for the top whitespace */
+  h1, center {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* --- End of new code --- */
+
+  /* --- Import IBM Plex Mono from Google Fonts --- */
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+  .vis-tooltip {
+    /* --- Use the new font --- */
+    font-family: "IBM Plex Mono", monospace; 
+    font-size: 14px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+</style>
+
+</head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#1f77b4", "font": {"color": "white"}, "id": "Philosophy", "label": "Philosophy", "shape": "dot", "size": 35, "title": "Philosophy"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Metaphysics", "label": "Metaphysics", "shape": "dot", "size": 8, "title": "\"Metaphysics\""}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Epistemology", "label": "Epistemology", "shape": "dot", "size": 20, "title": "Epistemology"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Ethics", "label": "Ethics", "shape": "dot", "size": 8, "title": "\"Ethics\""}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Logic", "label": "Logic", "shape": "dot", "size": 20, "title": "Logic"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Aesthetics", "label": "Aesthetics", "shape": "dot", "size": 20, "title": "Aesthetics"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Mind", "label": "Philosophy of Mind", "shape": "dot", "size": 20, "title": "Philosophy of Mind"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Science", "label": "Philosophy of Science", "shape": "dot", "size": 20, "title": "Philosophy of Science"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Cognitive Science", "label": "Philosophy of Cognitive Science", "shape": "dot", "size": 20, "title": "Philosophy of Cognitive Science"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Ontology", "label": "Ontology", "shape": "dot", "size": 20, "title": "Ontology"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Cosmology", "label": "Cosmology", "shape": "dot", "size": 20, "title": "Cosmology"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Language", "label": "Philosophy of Language", "shape": "dot", "size": 20, "title": "Philosophy of Language"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Phenomenology", "label": "Phenomenology", "shape": "dot", "size": 20, "title": "Phenomenology"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Political Philosophy", "label": "Political Philosophy", "shape": "dot", "size": 20, "title": "Political Philosophy"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Existentialism", "label": "Existentialism", "shape": "dot", "size": 20, "title": "Existentialism"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Pragmatism", "label": "Pragmatism", "shape": "dot", "size": 20, "title": "Pragmatism"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Analytic Philosophy", "label": "Analytic Philosophy", "shape": "dot", "size": 20, "title": "Analytic Philosophy"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Continental Philosophy", "label": "Continental Philosophy", "shape": "dot", "size": 20, "title": "Continental Philosophy"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Post-Structuralism", "label": "Post-Structuralism", "shape": "dot", "size": 20, "title": "Post-Structuralism"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Physics", "label": "Philosophy of Physics", "shape": "dot", "size": 20, "title": "Philosophy of Physics"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Philosophy of Biology", "label": "Philosophy of Biology", "shape": "dot", "size": 20, "title": "Philosophy of Biology"}, {"color": "#ff7f0e", "font": {"color": "white"}, "id": "Neuroscience", "label": "Neuroscience", "shape": "dot", "size": 20, "title": "Neuroscience"}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Immanuel Kant", "label": "Immanuel Kant", "shape": "dot", "size": 12, "title": "Immanuel Kant"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Critique of Pure Reason", "label": "Critique of Pure Reason", "shape": "dot", "size": 8, "title": "\"Critique of Pure Reason\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "J.G. Fichte", "label": "J.G. Fichte", "shape": "dot", "size": 12, "title": "J.G. Fichte"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Foundations of the Science of Knowledge", "label": "Foundations of the Science of Knowledge", "shape": "dot", "size": 8, "title": "\"Foundations of the Science of Knowledge\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "F.W.J. Schelling", "label": "F.W.J. Schelling", "shape": "dot", "size": 12, "title": "F.W.J. Schelling"}, {"color": "#d62728", "font": {"color": "white"}, "id": "System of Transcendental Idealism", "label": "System of Transcendental Idealism", "shape": "dot", "size": 8, "title": "\"System of Transcendental Idealism\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "John Locke", "label": "John Locke", "shape": "dot", "size": 12, "title": "John Locke"}, {"color": "#d62728", "font": {"color": "white"}, "id": "An Essay Concerning Human Understanding", "label": "An Essay Concerning Human Understanding", "shape": "dot", "size": 8, "title": "\"An Essay Concerning Human Understanding\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "David Hume", "label": "David Hume", "shape": "dot", "size": 12, "title": "David Hume"}, {"color": "#d62728", "font": {"color": "white"}, "id": "A Treatise of Human Nature", "label": "A Treatise of Human Nature", "shape": "dot", "size": 8, "title": "\"A Treatise of Human Nature\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Heraclitus", "label": "Heraclitus", "shape": "dot", "size": 12, "title": "Heraclitus"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Fragments", "label": "Fragments", "shape": "dot", "size": 8, "title": "\"Fragments\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Prolegomena to Any Future Metaphysics", "label": "Prolegomena to Any Future Metaphysics", "shape": "dot", "size": 8, "title": "\"Prolegomena to Any Future Metaphysics\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Gilles Deleuze", "label": "Gilles Deleuze", "shape": "dot", "size": 12, "title": "Gilles Deleuze"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Difference and Repetition", "label": "Difference and Repetition", "shape": "dot", "size": 8, "title": "\"Difference and Repetition\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Baruch Spinoza", "label": "Baruch Spinoza", "shape": "dot", "size": 12, "title": "Baruch Spinoza"}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Parmenides", "label": "Parmenides", "shape": "dot", "size": 12, "title": "Parmenides"}, {"color": "#d62728", "font": {"color": "white"}, "id": "On Nature", "label": "On Nature", "shape": "dot", "size": 8, "title": "\"On Nature\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Ren\u00e9 Descartes", "label": "Ren\u00e9 Descartes", "shape": "dot", "size": 12, "title": "Ren\u00e9 Descartes"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Meditations on First Philosophy", "label": "Meditations on First Philosophy", "shape": "dot", "size": 8, "title": "\"Meditations on First Philosophy\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Martin Heidegger", "label": "Martin Heidegger", "shape": "dot", "size": 12, "title": "Martin Heidegger"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Being and Time", "label": "Being and Time", "shape": "dot", "size": 8, "title": "\"Being and Time\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Edmund Husserl", "label": "Edmund Husserl", "shape": "dot", "size": 12, "title": "Edmund Husserl"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Logical Investigations", "label": "Logical Investigations", "shape": "dot", "size": 8, "title": "\"Logical Investigations\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Plato", "label": "Plato", "shape": "dot", "size": 12, "title": "Plato"}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Aristotle", "label": "Aristotle", "shape": "dot", "size": 12, "title": "Aristotle"}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Friedrich Nietzsche", "label": "Friedrich Nietzsche", "shape": "dot", "size": 12, "title": "Friedrich Nietzsche"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Thus Spoke Zarathustra", "label": "Thus Spoke Zarathustra", "shape": "dot", "size": 8, "title": "\"Thus Spoke Zarathustra\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Philipp Mainl\u00e4nder", "label": "Philipp Mainl\u00e4nder", "shape": "dot", "size": 12, "title": "Philipp Mainl\u00e4nder"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Philosophy of Redemption", "label": "Philosophy of Redemption", "shape": "dot", "size": 8, "title": "\"Philosophy of Redemption\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Arthur Schopenhauer", "label": "Arthur Schopenhauer", "shape": "dot", "size": 12, "title": "Arthur Schopenhauer"}, {"color": "#d62728", "font": {"color": "white"}, "id": "The World as Will and Representation", "label": "The World as Will and Representation", "shape": "dot", "size": 8, "title": "\"The World as Will and Representation\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Timaeus", "label": "Timaeus", "shape": "dot", "size": 8, "title": "\"Timaeus\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Lucretius", "label": "Lucretius", "shape": "dot", "size": 12, "title": "Lucretius"}, {"color": "#d62728", "font": {"color": "white"}, "id": "On the Nature of Things", "label": "On the Nature of Things", "shape": "dot", "size": 8, "title": "\"On the Nature of Things\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Jacques Derrida", "label": "Jacques Derrida", "shape": "dot", "size": 12, "title": "Jacques Derrida"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Of Grammatology", "label": "Of Grammatology", "shape": "dot", "size": 8, "title": "\"Of Grammatology\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "An Enquiry Concerning Human Understanding", "label": "An Enquiry Concerning Human Understanding", "shape": "dot", "size": 8, "title": "\"An Enquiry Concerning Human Understanding\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Michel Foucault", "label": "Michel Foucault", "shape": "dot", "size": 12, "title": "Michel Foucault"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Power/Knowledge", "label": "Power/Knowledge", "shape": "dot", "size": 8, "title": "\"Power/Knowledge\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Order of Things: An Archaeology of the Human Sciences", "label": "The Order of Things: An Archaeology of the Human Sciences", "shape": "dot", "size": 8, "title": "\"The Order of Things: An Archaeology of the Human Sciences\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Archaeology of Knowledge", "label": "The Archaeology of Knowledge", "shape": "dot", "size": 8, "title": "\"The Archaeology of Knowledge\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Edmund Gettier", "label": "Edmund Gettier", "shape": "dot", "size": 12, "title": "Edmund Gettier"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Is Justified True Belief Knowledge?", "label": "Is Justified True Belief Knowledge?", "shape": "dot", "size": 8, "title": "\"Is Justified True Belief Knowledge?\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Karl Popper", "label": "Karl Popper", "shape": "dot", "size": 12, "title": "Karl Popper"}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Logic of Scientific Discovery", "label": "The Logic of Scientific Discovery", "shape": "dot", "size": 8, "title": "\"The Logic of Scientific Discovery\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Theaetetus", "label": "Theaetetus", "shape": "dot", "size": 8, "title": "\"Theaetetus\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Posterior Analytics", "label": "Posterior Analytics", "shape": "dot", "size": 8, "title": "\"Posterior Analytics\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "S\u00f8ren Kierkegaard", "label": "S\u00f8ren Kierkegaard", "shape": "dot", "size": 12, "title": "S\u00f8ren Kierkegaard"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Concluding Unscientific Postscript", "label": "Concluding Unscientific Postscript", "shape": "dot", "size": 8, "title": "\"Concluding Unscientific Postscript\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Groundwork of the Metaphysics of Morals", "label": "Groundwork of the Metaphysics of Morals", "shape": "dot", "size": 8, "title": "\"Groundwork of the Metaphysics of Morals\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "On the Genealogy of Morality", "label": "On the Genealogy of Morality", "shape": "dot", "size": 8, "title": "\"On the Genealogy of Morality\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Either/Or", "label": "Either/Or", "shape": "dot", "size": 8, "title": "\"Either/Or\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Anti-Oedipus", "label": "Anti-Oedipus", "shape": "dot", "size": 8, "title": "\"Anti-Oedipus\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Georg Wilhelm Friedrich Hegel", "label": "Georg Wilhelm Friedrich Hegel", "shape": "dot", "size": 12, "title": "Georg Wilhelm Friedrich Hegel"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Elements of the Philosophy of Right", "label": "Elements of the Philosophy of Right", "shape": "dot", "size": 8, "title": "\"Elements of the Philosophy of Right\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Jean-Paul Sartre", "label": "Jean-Paul Sartre", "shape": "dot", "size": 12, "title": "Jean-Paul Sartre"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Existentialism is a Humanism", "label": "Existentialism is a Humanism", "shape": "dot", "size": 8, "title": "\"Existentialism is a Humanism\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "John Stuart Mill", "label": "John Stuart Mill", "shape": "dot", "size": 12, "title": "John Stuart Mill"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Utilitarianism", "label": "Utilitarianism", "shape": "dot", "size": 8, "title": "\"Utilitarianism\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Nicomachean Ethics", "label": "Nicomachean Ethics", "shape": "dot", "size": 8, "title": "\"Nicomachean Ethics\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Fear and Trembling", "label": "Fear and Trembling", "shape": "dot", "size": 8, "title": "\"Fear and Trembling\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Alasdair MacIntyre", "label": "Alasdair MacIntyre", "shape": "dot", "size": 12, "title": "Alasdair MacIntyre"}, {"color": "#d62728", "font": {"color": "white"}, "id": "After Virtue", "label": "After Virtue", "shape": "dot", "size": 8, "title": "\"After Virtue\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Republic", "label": "Republic", "shape": "dot", "size": 8, "title": "\"Republic\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Discipline and Punish: The Birth of the Prison", "label": "Discipline and Punish: The Birth of the Prison", "shape": "dot", "size": 8, "title": "\"Discipline and Punish: The Birth of the Prison\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The History of Sexuality", "label": "The History of Sexuality", "shape": "dot", "size": 8, "title": "\"The History of Sexuality\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Epicurus", "label": "Epicurus", "shape": "dot", "size": 12, "title": "Epicurus"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Letter to Menoeceus", "label": "Letter to Menoeceus", "shape": "dot", "size": 8, "title": "\"Letter to Menoeceus\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Seneca", "label": "Seneca", "shape": "dot", "size": 12, "title": "Seneca"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Letters from a Stoic", "label": "Letters from a Stoic", "shape": "dot", "size": 8, "title": "\"Letters from a Stoic\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Bertrand Russell", "label": "Bertrand Russell", "shape": "dot", "size": 12, "title": "Bertrand Russell"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Principia Mathematica", "label": "Principia Mathematica", "shape": "dot", "size": 8, "title": "\"Principia Mathematica\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Science of Logic", "label": "Science of Logic", "shape": "dot", "size": 8, "title": "\"Science of Logic\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Ludwig Wittgenstein", "label": "Ludwig Wittgenstein", "shape": "dot", "size": 12, "title": "Ludwig Wittgenstein"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Tractatus Logico-Philosophicus", "label": "Tractatus Logico-Philosophicus", "shape": "dot", "size": 8, "title": "\"Tractatus Logico-Philosophicus\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Gottlob Frege", "label": "Gottlob Frege", "shape": "dot", "size": 12, "title": "Gottlob Frege"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Begriffsschrift", "label": "Begriffsschrift", "shape": "dot", "size": 8, "title": "\"Begriffsschrift\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Kurt G\u00f6del", "label": "Kurt G\u00f6del", "shape": "dot", "size": 12, "title": "Kurt G\u00f6del"}, {"color": "#d62728", "font": {"color": "white"}, "id": "On Formally Undecidable Propositions", "label": "On Formally Undecidable Propositions", "shape": "dot", "size": 8, "title": "\"On Formally Undecidable Propositions\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Alfred North Whitehead", "label": "Alfred North Whitehead", "shape": "dot", "size": 12, "title": "Alfred North Whitehead"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Process and Reality", "label": "Process and Reality", "shape": "dot", "size": 8, "title": "\"Process and Reality\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Organon", "label": "Organon", "shape": "dot", "size": 8, "title": "\"Organon\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Chrysippus", "label": "Chrysippus", "shape": "dot", "size": 12, "title": "Chrysippus"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Fragments on Logic", "label": "Fragments on Logic", "shape": "dot", "size": 8, "title": "\"Fragments on Logic\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Critique of Judgment", "label": "Critique of Judgment", "shape": "dot", "size": 8, "title": "\"Critique of Judgment\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Of the Standard of Taste", "label": "Of the Standard of Taste", "shape": "dot", "size": 8, "title": "\"Of the Standard of Taste\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Friedrich Schiller", "label": "Friedrich Schiller", "shape": "dot", "size": 12, "title": "Friedrich Schiller"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Letters on the Aesthetic Education of Man", "label": "Letters on the Aesthetic Education of Man", "shape": "dot", "size": 8, "title": "\"Letters on the Aesthetic Education of Man\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Theodor Adorno", "label": "Theodor Adorno", "shape": "dot", "size": 12, "title": "Theodor Adorno"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Aesthetic Theory", "label": "Aesthetic Theory", "shape": "dot", "size": 8, "title": "\"Aesthetic Theory\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Plotinus", "label": "Plotinus", "shape": "dot", "size": 12, "title": "Plotinus"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Enneads", "label": "Enneads", "shape": "dot", "size": 8, "title": "\"Enneads\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Clive Bell", "label": "Clive Bell", "shape": "dot", "size": 12, "title": "Clive Bell"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Art", "label": "Art", "shape": "dot", "size": 8, "title": "\"Art\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Treatise of Human Nature", "label": "Treatise of Human Nature", "shape": "dot", "size": 8, "title": "\"Treatise of Human Nature\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Philosophical Investigations", "label": "Philosophical Investigations", "shape": "dot", "size": 8, "title": "\"Philosophical Investigations\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "On Sense and Reference", "label": "On Sense and Reference", "shape": "dot", "size": 8, "title": "\"On Sense and Reference\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "John Searle", "label": "John Searle", "shape": "dot", "size": 12, "title": "John Searle"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Speech Acts", "label": "Speech Acts", "shape": "dot", "size": 8, "title": "\"Speech Acts\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Noam Chomsky", "label": "Noam Chomsky", "shape": "dot", "size": 12, "title": "Noam Chomsky"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Syntactic Structures", "label": "Syntactic Structures", "shape": "dot", "size": 8, "title": "\"Syntactic Structures\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Phenomenology of Spirit", "label": "Phenomenology of Spirit", "shape": "dot", "size": 8, "title": "\"Phenomenology of Spirit\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Ideas", "label": "Ideas", "shape": "dot", "size": 8, "title": "\"Ideas\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Writing and Difference", "label": "Writing and Difference", "shape": "dot", "size": 8, "title": "\"Writing and Difference\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Concept of Anxiety", "label": "The Concept of Anxiety", "shape": "dot", "size": 8, "title": "\"The Concept of Anxiety\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Sickness Unto Death", "label": "Sickness Unto Death", "shape": "dot", "size": 8, "title": "\"Sickness Unto Death\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Cartesian Meditations", "label": "Cartesian Meditations", "shape": "dot", "size": 8, "title": "\"Cartesian Meditations\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "On the Phenomenology of the Consciousness of Internal Time", "label": "On the Phenomenology of the Consciousness of Internal Time", "shape": "dot", "size": 8, "title": "\"On the Phenomenology of the Consciousness of Internal Time\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Madness and Civilization", "label": "Madness and Civilization", "shape": "dot", "size": 8, "title": "\"Madness and Civilization\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Maurice Merleau-Ponty", "label": "Maurice Merleau-Ponty", "shape": "dot", "size": 12, "title": "Maurice Merleau-Ponty"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Phenomenology of Perception", "label": "Phenomenology of Perception", "shape": "dot", "size": 8, "title": "\"Phenomenology of Perception\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Being and Nothingness", "label": "Being and Nothingness", "shape": "dot", "size": 8, "title": "\"Being and Nothingness\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Birth of Tragedy", "label": "The Birth of Tragedy", "shape": "dot", "size": 8, "title": "\"The Birth of Tragedy\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Problems of Philosophy", "label": "The Problems of Philosophy", "shape": "dot", "size": 8, "title": "\"The Problems of Philosophy\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "Encyclopedia of the Philosophical Sciences", "label": "Encyclopedia of the Philosophical Sciences", "shape": "dot", "size": 8, "title": "\"Encyclopedia of the Philosophical Sciences\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Thomas Kuhn", "label": "Thomas Kuhn", "shape": "dot", "size": 12, "title": "Thomas Kuhn"}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Structure of Scientific Revolutions", "label": "The Structure of Scientific Revolutions", "shape": "dot", "size": 8, "title": "\"The Structure of Scientific Revolutions\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Imre Lakatos", "label": "Imre Lakatos", "shape": "dot", "size": 12, "title": "Imre Lakatos"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Proofs and Refutations", "label": "Proofs and Refutations", "shape": "dot", "size": 8, "title": "\"Proofs and Refutations\""}, {"color": "#d62728", "font": {"color": "white"}, "id": "The Birth of the Clinic", "label": "The Birth of the Clinic", "shape": "dot", "size": 8, "title": "\"The Birth of the Clinic\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Paul Feyerabend", "label": "Paul Feyerabend", "shape": "dot", "size": 12, "title": "Paul Feyerabend"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Against Method", "label": "Against Method", "shape": "dot", "size": 8, "title": "\"Against Method\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Willard Van Orman Quine", "label": "Willard Van Orman Quine", "shape": "dot", "size": 12, "title": "Willard Van Orman Quine"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Word and Object", "label": "Word and Object", "shape": "dot", "size": 8, "title": "\"Word and Object\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Alan Chalmers", "label": "Alan Chalmers", "shape": "dot", "size": 12, "title": "Alan Chalmers"}, {"color": "#d62728", "font": {"color": "white"}, "id": "What Is This Thing Called Science?", "label": "What Is This Thing Called Science?", "shape": "dot", "size": 8, "title": "\"What Is This Thing Called Science?\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Isaac Newton", "label": "Isaac Newton", "shape": "dot", "size": 12, "title": "Isaac Newton"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Mathematical Principles of Natural Philosophy", "label": "Mathematical Principles of Natural Philosophy", "shape": "dot", "size": 8, "title": "\"Mathematical Principles of Natural Philosophy\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Albert Einstein", "label": "Albert Einstein", "shape": "dot", "size": 12, "title": "Albert Einstein"}, {"color": "#d62728", "font": {"color": "white"}, "id": "Relativity: The Special and the General Theory", "label": "Relativity: The Special and the General Theory", "shape": "dot", "size": 8, "title": "\"Relativity: The Special and the General Theory\""}, {"color": "#2ca02c", "font": {"color": "white"}, "id": "Stephen Hawking", "label": "Stephen Hawking", "shape": "dot", "size": 12, "title": "Stephen Hawking"}, {"color": "#d62728", "font": {"color": "white"}, "id": "A Brief History of Time", "label": "A Brief History of Time", "shape": "dot", "size": 8, "title": "\"A Brief History of Time\""}]);
+                  edges = new vis.DataSet([{"from": "Philosophy", "title": "includes", "to": "Metaphysics"}, {"from": "Philosophy", "title": "includes", "to": "Epistemology"}, {"from": "Philosophy", "title": "includes", "to": "Ethics"}, {"from": "Philosophy", "title": "includes", "to": "Logic"}, {"from": "Philosophy", "title": "includes", "to": "Aesthetics"}, {"from": "Philosophy", "title": "includes", "to": "Philosophy of Mind"}, {"from": "Philosophy", "title": "includes", "to": "Philosophy of Science"}, {"from": "Philosophy", "title": "includes", "to": "Philosophy of Cognitive Science"}, {"from": "Metaphysics", "title": "includes", "to": "Ontology"}, {"from": "Metaphysics", "title": "includes", "to": "Cosmology"}, {"from": "Metaphysics", "title": "wrote", "to": "Aristotle"}, {"from": "Ethics", "title": "wrote", "to": "Baruch Spinoza"}, {"from": "Philosophy of Mind", "title": "includes", "to": "Philosophy of Language"}, {"from": "Philosophy of Mind", "title": "includes", "to": "Phenomenology"}, {"from": "Philosophy of Mind", "title": "includes", "to": "Political Philosophy"}, {"from": "Philosophy of Mind", "title": "includes", "to": "Philosophy of Science"}, {"from": "Philosophy of Mind", "title": "includes", "to": "Neuroscience"}, {"from": "Philosophy of Science", "title": "includes", "to": "Philosophy of Physics"}, {"from": "Philosophy of Science", "title": "includes", "to": "Philosophy of Biology"}, {"from": "Philosophy of Cognitive Science", "title": "includes", "to": "Philosophy of Language"}, {"from": "Ontology", "title": "wrote about", "to": "Immanuel Kant"}, {"from": "Ontology", "title": "wrote about", "to": "J.G. Fichte"}, {"from": "Ontology", "title": "wrote about", "to": "F.W.J. Schelling"}, {"from": "Ontology", "title": "wrote about", "to": "John Locke"}, {"from": "Ontology", "title": "wrote about", "to": "David Hume"}, {"from": "Ontology", "title": "wrote about", "to": "Heraclitus"}, {"from": "Ontology", "title": "wrote about", "to": "Baruch Spinoza"}, {"from": "Ontology", "title": "wrote about", "to": "Parmenides"}, {"from": "Ontology", "title": "wrote about", "to": "Ren\u00e9 Descartes"}, {"from": "Ontology", "title": "wrote about", "to": "Martin Heidegger"}, {"from": "Ontology", "title": "wrote about", "to": "Edmund Husserl"}, {"from": "Ontology", "title": "wrote about", "to": "Plato"}, {"from": "Ontology", "title": "wrote about", "to": "Aristotle"}, {"from": "Cosmology", "title": "wrote about", "to": "Friedrich Nietzsche"}, {"from": "Cosmology", "title": "wrote about", "to": "Philipp Mainl\u00e4nder"}, {"from": "Cosmology", "title": "wrote about", "to": "Arthur Schopenhauer"}, {"from": "Cosmology", "title": "wrote about", "to": "Plato"}, {"from": "Cosmology", "title": "wrote about", "to": "Lucretius"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "Immanuel Kant"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "John Locke"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "David Hume"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "Ludwig Wittgenstein"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "Gottlob Frege"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "John Searle"}, {"from": "Philosophy of Language", "title": "wrote about", "to": "Noam Chomsky"}, {"from": "Phenomenology", "title": "wrote about", "to": "Georg Wilhelm Friedrich Hegel"}, {"from": "Phenomenology", "title": "wrote about", "to": "Edmund Husserl"}, {"from": "Phenomenology", "title": "wrote about", "to": "S\u00f8ren Kierkegaard"}, {"from": "Phenomenology", "title": "wrote about", "to": "Michel Foucault"}, {"from": "Phenomenology", "title": "wrote about", "to": "Maurice Merleau-Ponty"}, {"from": "Phenomenology", "title": "wrote about", "to": "Martin Heidegger"}, {"from": "Phenomenology", "title": "wrote about", "to": "Jean-Paul Sartre"}, {"from": "Political Philosophy", "title": "includes", "to": "Existentialism"}, {"from": "Political Philosophy", "title": "includes", "to": "Pragmatism"}, {"from": "Political Philosophy", "title": "includes", "to": "Analytic Philosophy"}, {"from": "Existentialism", "title": "wrote about", "to": "Jean-Paul Sartre"}, {"from": "Analytic Philosophy", "title": "includes", "to": "Continental Philosophy"}, {"from": "Continental Philosophy", "title": "includes", "to": "Post-Structuralism"}, {"from": "Post-Structuralism", "title": "wrote about", "to": "Gilles Deleuze"}, {"from": "Post-Structuralism", "title": "wrote about", "to": "Jacques Derrida"}, {"from": "Immanuel Kant", "title": "wrote", "to": "Critique of Pure Reason"}, {"from": "Immanuel Kant", "title": "wrote", "to": "Prolegomena to Any Future Metaphysics"}, {"from": "Immanuel Kant", "title": "wrote", "to": "Groundwork of the Metaphysics of Morals"}, {"from": "Immanuel Kant", "title": "wrote", "to": "Critique of Judgment"}, {"from": "J.G. Fichte", "title": "wrote", "to": "Foundations of the Science of Knowledge"}, {"from": "F.W.J. Schelling", "title": "wrote", "to": "System of Transcendental Idealism"}, {"from": "John Locke", "title": "wrote", "to": "An Essay Concerning Human Understanding"}, {"from": "David Hume", "title": "wrote", "to": "A Treatise of Human Nature"}, {"from": "David Hume", "title": "wrote", "to": "An Enquiry Concerning Human Understanding"}, {"from": "David Hume", "title": "wrote", "to": "Of the Standard of Taste"}, {"from": "David Hume", "title": "wrote", "to": "Treatise of Human Nature"}, {"from": "Heraclitus", "title": "wrote", "to": "Fragments"}, {"from": "Gilles Deleuze", "title": "wrote", "to": "Difference and Repetition"}, {"from": "Gilles Deleuze", "title": "wrote", "to": "Anti-Oedipus"}, {"from": "Parmenides", "title": "wrote", "to": "On Nature"}, {"from": "Parmenides", "title": "wrote", "to": "Plato"}, {"from": "Ren\u00e9 Descartes", "title": "wrote", "to": "Meditations on First Philosophy"}, {"from": "Martin Heidegger", "title": "wrote", "to": "Being and Time"}, {"from": "Edmund Husserl", "title": "wrote", "to": "Logical Investigations"}, {"from": "Edmund Husserl", "title": "wrote", "to": "Ideas"}, {"from": "Edmund Husserl", "title": "wrote", "to": "Cartesian Meditations"}, {"from": "Edmund Husserl", "title": "wrote", "to": "On the Phenomenology of the Consciousness of Internal Time"}, {"from": "Plato", "title": "wrote", "to": "Timaeus"}, {"from": "Plato", "title": "wrote", "to": "Theaetetus"}, {"from": "Plato", "title": "wrote", "to": "Republic"}, {"from": "Aristotle", "title": "wrote", "to": "Posterior Analytics"}, {"from": "Aristotle", "title": "wrote", "to": "Nicomachean Ethics"}, {"from": "Aristotle", "title": "wrote", "to": "Organon"}, {"from": "Friedrich Nietzsche", "title": "wrote", "to": "Thus Spoke Zarathustra"}, {"from": "Friedrich Nietzsche", "title": "wrote", "to": "On the Genealogy of Morality"}, {"from": "Friedrich Nietzsche", "title": "wrote", "to": "The Birth of Tragedy"}, {"from": "Philipp Mainl\u00e4nder", "title": "wrote", "to": "Philosophy of Redemption"}, {"from": "Arthur Schopenhauer", "title": "wrote", "to": "The World as Will and Representation"}, {"from": "Lucretius", "title": "wrote", "to": "On the Nature of Things"}, {"from": "Jacques Derrida", "title": "wrote", "to": "Of Grammatology"}, {"from": "Jacques Derrida", "title": "wrote", "to": "Writing and Difference"}, {"from": "Michel Foucault", "title": "wrote", "to": "Power/Knowledge"}, {"from": "Michel Foucault", "title": "wrote", "to": "The Order of Things: An Archaeology of the Human Sciences"}, {"from": "Michel Foucault", "title": "wrote", "to": "The Archaeology of Knowledge"}, {"from": "Michel Foucault", "title": "wrote", "to": "Discipline and Punish: The Birth of the Prison"}, {"from": "Michel Foucault", "title": "wrote", "to": "The History of Sexuality"}, {"from": "Michel Foucault", "title": "wrote", "to": "Madness and Civilization"}, {"from": "Michel Foucault", "title": "wrote", "to": "The Birth of the Clinic"}, {"from": "Edmund Gettier", "title": "wrote", "to": "Is Justified True Belief Knowledge?"}, {"from": "Karl Popper", "title": "wrote", "to": "The Logic of Scientific Discovery"}, {"from": "S\u00f8ren Kierkegaard", "title": "wrote", "to": "Concluding Unscientific Postscript"}, {"from": "S\u00f8ren Kierkegaard", "title": "wrote", "to": "Either/Or"}, {"from": "S\u00f8ren Kierkegaard", "title": "wrote", "to": "Fear and Trembling"}, {"from": "S\u00f8ren Kierkegaard", "title": "wrote", "to": "The Concept of Anxiety"}, {"from": "S\u00f8ren Kierkegaard", "title": "wrote", "to": "Sickness Unto Death"}, {"from": "Georg Wilhelm Friedrich Hegel", "title": "wrote", "to": "Elements of the Philosophy of Right"}, {"from": "Georg Wilhelm Friedrich Hegel", "title": "wrote", "to": "Science of Logic"}, {"from": "Georg Wilhelm Friedrich Hegel", "title": "wrote", "to": "Phenomenology of Spirit"}, {"from": "Georg Wilhelm Friedrich Hegel", "title": "wrote", "to": "Encyclopedia of the Philosophical Sciences"}, {"from": "Jean-Paul Sartre", "title": "wrote", "to": "Existentialism is a Humanism"}, {"from": "Jean-Paul Sartre", "title": "wrote", "to": "Being and Nothingness"}, {"from": "John Stuart Mill", "title": "wrote", "to": "Utilitarianism"}, {"from": "Alasdair MacIntyre", "title": "wrote", "to": "After Virtue"}, {"from": "Epicurus", "title": "wrote", "to": "Letter to Menoeceus"}, {"from": "Seneca", "title": "wrote", "to": "Letters from a Stoic"}, {"from": "Bertrand Russell", "title": "wrote", "to": "Principia Mathematica"}, {"from": "Bertrand Russell", "title": "wrote", "to": "The Problems of Philosophy"}, {"from": "Ludwig Wittgenstein", "title": "wrote", "to": "Tractatus Logico-Philosophicus"}, {"from": "Ludwig Wittgenstein", "title": "wrote", "to": "Philosophical Investigations"}, {"from": "Gottlob Frege", "title": "wrote", "to": "Begriffsschrift"}, {"from": "Gottlob Frege", "title": "wrote", "to": "On Sense and Reference"}, {"from": "Kurt G\u00f6del", "title": "wrote", "to": "On Formally Undecidable Propositions"}, {"from": "Alfred North Whitehead", "title": "wrote", "to": "Process and Reality"}, {"from": "Chrysippus", "title": "wrote", "to": "Fragments on Logic"}, {"from": "Friedrich Schiller", "title": "wrote", "to": "Letters on the Aesthetic Education of Man"}, {"from": "Theodor Adorno", "title": "wrote", "to": "Aesthetic Theory"}, {"from": "Plotinus", "title": "wrote", "to": "Enneads"}, {"from": "Clive Bell", "title": "wrote", "to": "Art"}, {"from": "John Searle", "title": "wrote", "to": "Speech Acts"}, {"from": "Noam Chomsky", "title": "wrote", "to": "Syntactic Structures"}, {"from": "Maurice Merleau-Ponty", "title": "wrote", "to": "Phenomenology of Perception"}, {"from": "Thomas Kuhn", "title": "wrote", "to": "The Structure of Scientific Revolutions"}, {"from": "Imre Lakatos", "title": "wrote", "to": "Proofs and Refutations"}, {"from": "Paul Feyerabend", "title": "wrote", "to": "Against Method"}, {"from": "Willard Van Orman Quine", "title": "wrote", "to": "Word and Object"}, {"from": "Alan Chalmers", "title": "wrote", "to": "What Is This Thing Called Science?"}, {"from": "Isaac Newton", "title": "wrote", "to": "Mathematical Principles of Natural Philosophy"}, {"from": "Albert Einstein", "title": "wrote", "to": "Relativity: The Special and the General Theory"}, {"from": "Stephen Hawking", "title": "wrote", "to": "A Brief History of Time"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"face": "IBMPlexMono", "size": 16, "mono": true}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
