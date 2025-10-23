@@ -6,6 +6,7 @@ You will intentionally find the same work listed multiple times. For example, Im
 
 This structure allows you to filter the dataset by a branch (e.g., "show me all works in `Ethics`") or by an author (e.g., "show me all branches `Hegel` wrote in") without losing the complexity of each work.
 
+![App Screenshot](images/Screenshot%202025-10-23%20021751.png)
 
 
 ## How to Contribute
