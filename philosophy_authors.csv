@@ -5,38 +5,69 @@ Metaphysics,Ontology,F.W.J. Schelling,System of Transcendental Idealism
 Metaphysics,Ontology,John Locke,An Essay Concerning Human Understanding
 Metaphysics,Ontology,David Hume,A Treatise of Human Nature
 Metaphysics,Ontology,Heraclitus,Fragments
+Metaphysics,Idealism,George Berkeley,A Treatise Concerning the Principles of Human Knowledge
 Metaphysics,Ontology,Immanuel Kant,Prolegomena to Any Future Metaphysics
 Metaphysics,Post-Structuralism,Gilles Deleuze,Difference and Repetition
 Metaphysics,Ontology,Baruch Spinoza,Ethics
+Metaphysics,Theology,Augustine of Hippo,Confessions
+Metaphysics,Theology,Augustine of Hippo,City of God
+Metaphysics,Theology,Thomas Aquinas,Summa Theologica
+Metaphysics,Ontology,Anselm of Canterbury,Proslogion
+Metaphysics,,Friedrich Nietzsche,The Gay Science
+Metaphysics,Post-Structuralism,Gilles Deleuze & Félix Guattari,A Thousand Plateaus
+Metaphysics,Ontology,Martin Heidegger,Introduction to Metaphysics
+Metaphysics,,Aristotle,Physics
 Metaphysics,Ontology,Parmenides,On Nature
+Metaphysics,Post-Structuralism,Michel Foucault,The Order of Things
+Metaphysics,Existentialism,Franz Kafka,The Metamorphosis
 Metaphysics,Ontology,René Descartes,Meditations on First Philosophy
 Metaphysics,Ontology,Martin Heidegger,Being and Time
 Metaphysics,Ontology,Edmund Husserl,Logical Investigations
 Metaphysics,Ontology,Plato,Parmenides
+Metaphysics,Ontology,Gottfried Wilhelm Leibniz,Monadology
+Philosophy of Mind,,Gottfried Wilhelm Leibniz,Discourse on Metaphysics
 Metaphysics,Ontology,Aristotle,Metaphysics
+Metaphysics,Existentialism,Albert Camus,The Myth of Sisyphus
+Metaphysics,Existentialism,Albert Camus,The Stranger
+Metaphysics,Existentialism,Jean-Paul Sartre,Nausea
 Metaphysics,Cosmology,Friedrich Nietzsche,Thus Spoke Zarathustra
 Metaphysics,Cosmology,Philipp Mainländer,Philosophy of Redemption
 Metaphysics,Cosmology,Arthur Schopenhauer,The World as Will and Representation
 Metaphysics,Cosmology,Plato,Timaeus
+Metaphysics,Deconstruction,Jacques Derrida,Speech and Phenomena
 Metaphysics,Cosmology,Lucretius,On the Nature of Things
 Epistemology,Post-Structuralism,Jacques Derrida,Of Grammatology
 Epistemology,,Immanuel Kant,Critique of Pure Reason
 Epistemology,,John Locke,An Essay Concerning Human Understanding
 Epistemology,,David Hume,An Enquiry Concerning Human Understanding
 Epistemology,,Heraclitus,Fragments
+Epistemology,Ontology,J.G. Fichte,The Vocation of Man
 Epistemology,,Michel Foucault,Power/Knowledge
+Epistemology,Empiricism,George Berkeley,A Treatise Concerning the Principles of Human Knowledge
 Epistemology,,Michel Foucault,The Order of Things: An Archaeology of the Human Sciences
 Epistemology,,Michel Foucault,The Archaeology of Knowledge
 Epistemology,,Edmund Gettier,Is Justified True Belief Knowledge?
 Epistemology,,Karl Popper,The Logic of Scientific Discovery
 Epistemology,,Plato,Theaetetus
+Epistemology,,Ludwig Wittgenstein,On Certainty
 Epistemology,,Aristotle,Posterior Analytics
 Epistemology,,Søren Kierkegaard,Concluding Unscientific Postscript
 Ethics,,Immanuel Kant,Groundwork of the Metaphysics of Morals
+Ethics,Deontology,Immanuel Kant,Critique of Practical Reason
+Ethics,,Friedrich Nietzsche,Beyond Good and Evil
+Ethics,Analytic Philosophy,G.E. Moore,Principia Ethica
+Ethics,,Plato,Symposium
+Ethics,,Plato,Phaedrus
+Ethics,,Marcus Aurelius,Meditations
 Ethics,,David Hume,A Treatise of Human Nature
 Ethics,,Friedrich Nietzsche,On the Genealogy of Morality
 Ethics,,Baruch Spinoza,Ethics
+Ethics,Political Philosophy,J.G. Fichte,Foundations of Natural Right
 Ethics,,Søren Kierkegaard,Either/Or
+Ethics,Existentialism,Franz Kafka,The Trial
+Ethics,Existentialism,Fyodor Dostoevsky,The Brothers Karamazov
+Ethics,Existentialism,Albert Camus,The Rebel
+Ethics,Existentialism,Jean-Paul Sartre,Existentialism is a Humanism
 Ethics,Post-Structuralism,Gilles Deleuze,Anti-Oedipus
 Ethics,,Georg Wilhelm Friedrich Hegel,Elements of the Philosophy of Right
 Ethics,Existentialism,Jean-Paul Sartre,Existentialism is a Humanism
@@ -62,6 +93,8 @@ Logic,,Alfred North Whitehead,Process and Reality
 Logic,,Aristotle,Organon
 Logic,,Chrysippus,Fragments on Logic
 Aesthetics,,Immanuel Kant,Critique of Judgment
+Aesthetics,,Georg Wilhelm Friedrich Hegel,Lectures on Aesthetics
+Aesthetics,,Aristotle,Poetics
 Aesthetics,,John Locke,An Essay Concerning Human Understanding
 Aesthetics,,David Hume,Of the Standard of Taste
 Aesthetics,,Friedrich Schiller,Letters on the Aesthetic Education of Man
@@ -104,3 +137,14 @@ Philosophy of Science,,Alan Chalmers,What Is This Thing Called Science?
 Philosophy of Science,,Isaac Newton,Mathematical Principles of Natural Philosophy
 Philosophy of Science,,Albert Einstein,Relativity: The Special and the General Theory
 Philosophy of Science,,Stephen Hawking,A Brief History of Time
+Political Philosophy,,Plato,Apology
+Political Philosophy,,Plato,Crito
+Political Philosophy,,Aristotle,Politics
+Political Philosophy,,Niccolò Machiavelli,The Prince
+Political Philosophy,,Thomas Hobbes,Leviathan
+Political Philosophy,,John Locke,Two Treatises of Government
+Political Philosophy,,Jean-Jacques Rousseau,The Social Contract
+Political Philosophy,,Karl Marx & Friedrich Engels,The Communist Manifesto
+Political Philosophy,,John Stuart Mill,On Liberty
+Political Philosophy,,John Rawls,A Theory of Justice
+Political Philosophy,Biopolitics,Michel Foucault,The Birth of Biopolitics
