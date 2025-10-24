@@ -1,17 +1,21 @@
 from graph_utils import load_and_build_graph, create_styled_network, save_network_html
-import webbrowser
 import os
-
+import shutil
 
 def main():
     """
     Main function to run the graph generation process.
     """
-    # Define file names
+    # Define file names and directories
     nodes_csv = "philosophy_nodes.csv"
     edges_csv = "philosophy_edges.csv"
     authors_csv = "philosophy_authors.csv"
-    output_html = "philosophy_extended_network.html"
+    
+    # GitHub Pages directory
+    output_dir = "docs"
+    output_html = os.path.join(output_dir, "index.html")
+    lib_source_dir = "lib"
+    lib_dest_dir = os.path.join(output_dir, "lib")
 
     print("1. Loading and building graph data...")
     G = load_and_build_graph(nodes_csv, edges_csv, authors_csv)
@@ -23,17 +27,23 @@ def main():
         print(f"3. Saving final HTML to {output_html}...")
         save_network_html(net, output_html)
 
-        # --- This block opens the file in your browser ---
-        print(f"4. Opening {output_html} in your browser...")
+        # --- Copy lib directory for GitHub Pages ---
+        print(f"4. Copying '{lib_source_dir}' to '{lib_dest_dir}'...")
         try:
-            # Get the full absolute path for the file
-            full_path = os.path.realpath(output_html)
-            webbrowser.open(f"file://{full_path}")
+            # Remove the destination directory if it exists, to ensure a clean copy
+            if os.path.exists(lib_dest_dir):
+                shutil.rmtree(lib_dest_dir)
+            shutil.copytree(lib_source_dir, lib_dest_dir)
+            print("   Successfully copied 'lib' directory.")
         except Exception as e:
-            print(f"Could not open browser: {e}")
-        # --- End of browser-opening block ---
+            print(f"   Error copying 'lib' directory: {e}")
+        # --- End of copy block ---
 
-        print("\nProcess finished.")
+        print("\nProcess finished. To deploy on GitHub Pages:")
+        print("1. Commit and push the 'docs' directory to your GitHub repository.")
+        print("2. In your repository settings, go to 'Pages'.")
+        print("3. Under 'Build and deployment', select 'Deploy from a branch' and choose the 'main' branch with the '/docs' folder.")
+        print("4. Your site will be live at the URL provided by GitHub.")
 
 
 # This makes the script runnable by typing 'python graph.py'
